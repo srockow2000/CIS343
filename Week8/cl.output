@@ -1,0 +1,158 @@
+Grammar
+
+    0 $accept: program $end
+
+    1 program: contact_list
+
+    2 contact_list: contact
+    3             | contact_list contact
+
+    4 contact: NAME SEP NAME SEP PHONE SEP EMAIL SEP AGE ENDL
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    NAME <str> (258) 4
+    SEP (259) 4
+    PHONE <str> (260) 4
+    EMAIL <str> (261) 4
+    AGE <iVal> (262) 4
+    ENDL (263) 4
+
+
+Nonterminals, with rules where they appear
+
+    $accept (9)
+        on left: 0
+    program (10)
+        on left: 1
+        on right: 0
+    contact_list (11)
+        on left: 2 3
+        on right: 1 3
+    contact (12)
+        on left: 4
+        on right: 2 3
+
+
+State 0
+
+    0 $accept: . program $end
+
+    NAME  shift, and go to state 1
+
+    program       go to state 2
+    contact_list  go to state 3
+    contact       go to state 4
+
+
+State 1
+
+    4 contact: NAME . SEP NAME SEP PHONE SEP EMAIL SEP AGE ENDL
+
+    SEP  shift, and go to state 5
+
+
+State 2
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 6
+
+
+State 3
+
+    1 program: contact_list .
+    3 contact_list: contact_list . contact
+
+    NAME  shift, and go to state 1
+
+    $default  reduce using rule 1 (program)
+
+    contact  go to state 7
+
+
+State 4
+
+    2 contact_list: contact .
+
+    $default  reduce using rule 2 (contact_list)
+
+
+State 5
+
+    4 contact: NAME SEP . NAME SEP PHONE SEP EMAIL SEP AGE ENDL
+
+    NAME  shift, and go to state 8
+
+
+State 6
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 7
+
+    3 contact_list: contact_list contact .
+
+    $default  reduce using rule 3 (contact_list)
+
+
+State 8
+
+    4 contact: NAME SEP NAME . SEP PHONE SEP EMAIL SEP AGE ENDL
+
+    SEP  shift, and go to state 9
+
+
+State 9
+
+    4 contact: NAME SEP NAME SEP . PHONE SEP EMAIL SEP AGE ENDL
+
+    PHONE  shift, and go to state 10
+
+
+State 10
+
+    4 contact: NAME SEP NAME SEP PHONE . SEP EMAIL SEP AGE ENDL
+
+    SEP  shift, and go to state 11
+
+
+State 11
+
+    4 contact: NAME SEP NAME SEP PHONE SEP . EMAIL SEP AGE ENDL
+
+    EMAIL  shift, and go to state 12
+
+
+State 12
+
+    4 contact: NAME SEP NAME SEP PHONE SEP EMAIL . SEP AGE ENDL
+
+    SEP  shift, and go to state 13
+
+
+State 13
+
+    4 contact: NAME SEP NAME SEP PHONE SEP EMAIL SEP . AGE ENDL
+
+    AGE  shift, and go to state 14
+
+
+State 14
+
+    4 contact: NAME SEP NAME SEP PHONE SEP EMAIL SEP AGE . ENDL
+
+    ENDL  shift, and go to state 15
+
+
+State 15
+
+    4 contact: NAME SEP NAME SEP PHONE SEP EMAIL SEP AGE ENDL .
+
+    $default  reduce using rule 4 (contact)

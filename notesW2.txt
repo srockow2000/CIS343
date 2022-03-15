@@ -1,0 +1,38 @@
+
+What is an array?
+
+
+* Continguous memory
+* The most important thing about an array is when it's created
+* An array is a compile-time construct, which is static
+
+Runtime === dynamic
+Compile time === static
+
+Arrays are static, which means that the memory is created at compile time.
+
+How does the compiler make the space for that?
+
+int nums[100]
+*
+*
+*
+-> 100 bytes allocated for the array and then bytes allocated for code
+
+static means that it gets compiled into the compile file
+Arrays could be compiled on the stack, and it could not
+
+
+Dynamic memory goes on the heap
+Compile time -> stack
+
+Compile sizeof -> tells how big it is
+Dynamic malloc -> returns a pointer to it
+
+Why do people get confused?
+
+* C can't pass an array
+* As a result, C passes a pointer
+* They are both passed by pointers
+	* Pass by copy
+
