@@ -1,0 +1,21 @@
+Instructor notes
+
+
+* students struggle with creating object-oriented designs
+
+
+
+Python Game -OO
+
+
+* blocks
+* ball
+* paddle
+* outline
+* overlay
+
+-> all builds a ... game
+
+
+
+
