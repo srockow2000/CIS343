@@ -18,4 +18,51 @@ Python Game -OO
 
 
 
+Relationships
+
+* block
+-health
+-color
+
+*Paddle
+-width
+-speed
+
+*Game
+-score
+-numbeOfLines
+
+*Ball
+
+*Overlay
+
+block.health -> many to one <- Game
+block.color -> many to one <- Game
+
+Ball -> n to 1 <- Game
+
+paddle.width -> 1 to 1 <- Game
+paddle.speed -> 1 to 1 <- Game
+
+overlay -> 1 to 1 <- Game
+
+-----------------------------------
+
+*pygame.sprite.Sprite
+-image
+-rectangle
+--includes position, width, and height
+
+-----------------------------------
+
+Need 2 methods
+
+*draw 
+*update
+
+----------------------------------
+Need multiple methods
+Assume constructors are included
+
+The goal is reusability
 
