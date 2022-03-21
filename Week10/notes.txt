@@ -23,18 +23,35 @@ Relationships
 * block
 -health
 -color
++hit()
+-changeColor()
 
 *Paddle
 -width
 -speed
++left()
++update()
++right()
 
 *Game
 -score
 -numbeOfLines
++run()
 
 *Ball
+-update
+-velocity x + y
+// optional
+-color
+-size 
 
 *Overlay
+-> who's in charge of overlay (overlay is in charge of it's own state, but who gives it info?)
+-Game is in charge
+	-> tells overlay to do something through getters and setters
+-setText(str)
+
+-----------------------------------
 
 block.health -> many to one <- Game
 block.color -> many to one <- Game
@@ -53,6 +70,8 @@ overlay -> 1 to 1 <- Game
 -rectangle
 --includes position, width, and height
 
+*pygame sprite Sprite groups
+-collision
 -----------------------------------
 
 Need 2 methods
@@ -65,4 +84,7 @@ Need multiple methods
 Assume constructors are included
 
 The goal is reusability
+
+----------------------------------
+
 
