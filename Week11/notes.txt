@@ -1,0 +1,35 @@
+Javascript is weird because of its flexibility. However, languages tend to last because of their flexibility. 
+
+*Mocha, LiveScript, ECMAScript, Javascript -> alternative names
+
+Originally called Mocha. Java was obscenely popular in the 90s and everyone jumped on the coffee bandwagon, therefore, Mocha for Javascript.
+
+Java and Javascript - "cousins so distantly related they could get married in any state of the union"
+
+ECMAScript is a standard that Java adheres to. 
+
+Javascript is asynchronous. A command can run to completion while multiple other commands are runinng.
+Javascript is worked on by an assortion of companies; it is not owned by a single company.
+
+Apparently, Netscape was the browser that decided to have multiple tabs instead of multiple web pages. 
+Microsoft vs. Netscape. Microsoft bankrupted Netscape, but got hit by huge fines due to a mononpoly. Netscape created the Mozilla project from which Firefox was born. 
+Netscape had enough connections that they were able to get Microsoft to realize that they couldn't monopolize the field. 
+
+In the end of the 90s, early 2000s, you would have to hire a company with a backend and a frontend team to develop a website. 
+
+Javascript is a dynamic, weakly typed, prototype-based language.
+
+Prototyped based inheritance is inheritance that inherits from an object and not a class; it's more stripped down, less rigid. Sort of OO light.
+
+3 ways to create a variable:
+*const - never change
+*let - local in scope
+*var - global in scope (generally, do not use this anymore!!!)
+
+Javascript objects are hash maps. A key can associate to any type of data. A key can be an object, a function, or any data you want.
+
+In JavaScript, there are no less than 5 ways to create an object. 
+
+1. Object literal - create a hashmap (variableName: variableValue)
+2. Factory Functions - returns a hashmap
+3. Constructor Function - new keyword (synctactic sugar) 
