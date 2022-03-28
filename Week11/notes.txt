@@ -32,4 +32,25 @@ In JavaScript, there are no less than 5 ways to create an object.
 
 1. Object literal - create a hashmap (variableName: variableValue)
 2. Factory Functions - returns a hashmap
-3. Constructor Function - new keyword (synctactic sugar) 
+3. Constructor Function - new keyword (synctactic sugar)
+4. Object.create() method - makes a new object that has a prototype of another object
+
+
+Class - a blueprint
+
+Pretend we have a blueprint of a student. We're going to say that this blueprint says that every student has a string that's their name, an integer that's their g-number, and a double for gpa. Some functions like a toString(), some getters(), and some setters(). In classical inheritance, it would get loaded into memory and the class wouldn't store anything. When you call the new keyword, you create an object that has space for name, g-number, and gpa.
+
+
+
+abby.__proto__.__proto__.name  
+
+
+function expression
+
+Example 1: function square(x)
+Example 2: const square = function(x)
+
+
+JavaScript cannot mark data as public or private. But we know that if we use the let keyword, then the data will be created in a local scope. We also know that it is perfectly okay to return a function from a function. Is there any reason why we cannot create a local variable inside of a function and then return a function from inside the function, that because it was created inside the function, can access that local scope. 
+
+JavaScript has a lot of flexibility, so people tend to do 'nasty stuff' to it. It's insecure since it mostly runs on client side. 
