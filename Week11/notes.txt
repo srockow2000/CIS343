@@ -53,4 +53,16 @@ Example 2: const square = function(x)
 
 JavaScript cannot mark data as public or private. But we know that if we use the let keyword, then the data will be created in a local scope. We also know that it is perfectly okay to return a function from a function. Is there any reason why we cannot create a local variable inside of a function and then return a function from inside the function, that because it was created inside the function, can access that local scope. 
 
-JavaScript has a lot of flexibility, so people tend to do 'nasty stuff' to it. It's insecure since it mostly runs on client side. 
+JavaScript has a lot of flexibility, so people tend to do 'nasty stuff' to it. It's insecure since it mostly runs on client side.
+
+JavaScript - Asynchronous Programming
+
+What might the web browser need to provide the code runing within it. 
+* files
+* domain name lookups
+* construct a docuemnt with a data structure that's common so you know how to program for the browser and can preview it
+
+There are a lot of common things that the web needs to provide - web api. Sound, location, speech recognition, text-to-speech synthesis etc. are all rpovided byt he web api.
+
+
+Most interpretations of javascript are single threaded. How does it do everything at once? JavaScript doesn't do it; it asks the web api or the libraries to do it for it. Another program could be mulithreaded, but JavaScript is usually single-threaded. When it calls another ufnction, that function is put onto the stack. With JavaScript, we've got the stack, some api (webapi), and we also have a message queue (FIFO).   
