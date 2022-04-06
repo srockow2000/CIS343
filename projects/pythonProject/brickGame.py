@@ -42,23 +42,29 @@ class Paddle(pg.sprite.Sprite):
         width, height = window.get_size()
 
         # create paddle
-        self.image = pg.Surface((64, 64))
+        self.image = pg.Surface((300, 25))
         self.rect = self.image.get_rect()
 
-        def move(self):
-            keys = pg.key.get_pressed()
 
-            if keys[K_a]:
-                self.state = MOVE_LEFT
-                self.accel.x += 5
-                
-            if keys[K_d]:
-                self.state = MOVE_RIGHT
-                self.accel.x += 5
         # position paddle
-        self.rect.x = move(self)
-        self.rect.y = 700
+        self.rect.x = 400
+        self.rect.y = 600
 
+
+    def move(self):
+        keys = pg.key.get_pressed()
+
+        # use key binding to move the paddle
+        if pg.key.get_pressed()[K_LEFT]:
+            print("a was pressed")
+            # reset x-coordinate by -100 (left)
+            
+            self.rect.x += self.velocity[0]
+            self.velocity(5, 10)
+        
+        if keys[K_RIGHT]:
+            # reset x-coordinate by 100 (right)
+            self.rect.x += 100
 
 class Blah(pg.sprite.Sprite):
     explodifiers = None
@@ -107,6 +113,7 @@ class Game:
         self.blahs = pg.sprite.Group()
         self.exploders = pg.sprite.Group()
         self.brick = pg.sprite.Group()
+        self.paddle = pg.sprite.Group()
 
     def run(self):
         while self.__running:
@@ -142,18 +149,25 @@ class Game:
     def getExplodifiers(self):
         return self.exploders
 
+    def getPaddle(self):
+        return self.paddle
+
+
+
 def main():
     game = Game()
-    
+
     for _ in range(0,50):
         game.addBrick(Blah())
         #game.addBlah( Blah() )
-
 
     game.addExplodifier(Paddle())
     Blah.explodifiers = game.getExplodifiers()
     game.setRunning(True)
     game.run()
+
+    while (True):
+        game.getPaddle().move()
 
 if __name__ == '__main__':
     main()
