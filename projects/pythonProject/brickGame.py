@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 
 import pygame as pg
+from pygame import *
 import random
+
+MOVE_LEFT = -10
+MOVE_RIGHT = 10
 
 """
 A constructor that creates a brick
@@ -32,15 +36,30 @@ The paddle class
 class Paddle(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
+
+        # set window size to get screen dimensions
+        window = pg.display.set_mode((800, 800))
+        width, height = window.get_size()
+
+        # create paddle
         self.image = pg.Surface((64, 64))
         self.rect = self.image.get_rect()
 
-        self.rect.x = 500
-        self.rect.y = 100
+        def move(self):
+            keys = pg.key.get_pressed()
+
+            if keys[K_a]:
+                self.state = MOVE_LEFT
+                self.accel.x += 5
+                
+            if keys[K_d]:
+                self.state = MOVE_RIGHT
+                self.accel.x += 5
+        # position paddle
+        self.rect.x = move(self)
+        self.rect.y = 700
 
 
-
-"""
 class Blah(pg.sprite.Sprite):
     explodifiers = None
     def __init__(self):
@@ -53,7 +72,7 @@ class Blah(pg.sprite.Sprite):
         self.rect.y = random.randint(0,600)
         self.velocity = [r(0,3) - 3, r(0,3) - 3]
         self.explodifiers = None
-        self.boom = pg.mixer.Sound("./boom.mp3")
+#        self.boom = pg.mixer.Sound("./boom.mp3")
 
     def update(self):
         self.rect.x += self.velocity[0]
@@ -71,11 +90,11 @@ class Blah(pg.sprite.Sprite):
             self.velocity[0] = 0
             self.velocity[1] = 0
             self.rect.x = -100
-         self.boom.play()
+#         self.boom.play()
 
     def setExplodifiers(self, explodifiers):
         self.explodifiers = explodifiers
-"""
+
 
 
 
@@ -87,6 +106,7 @@ class Game:
         self.clock = pg.time.Clock()
         self.blahs = pg.sprite.Group()
         self.exploders = pg.sprite.Group()
+        self.brick = pg.sprite.Group()
 
     def run(self):
         while self.__running:
@@ -110,6 +130,9 @@ class Game:
     def setRunning(self, running):
         self.__running = running
 
+    def addBrick(self, brick):
+        self.brick.add(brick)
+
     def addBlah(self, blah):
         self.blahs.add(blah)
 
@@ -122,10 +145,12 @@ class Game:
 def main():
     game = Game()
     
-    for _ in range(0,100):
-        game.addBlah( Blah() )
+    for _ in range(0,50):
+        game.addBrick(Blah())
+        #game.addBlah( Blah() )
 
-    game.addExplodifier(Brick())
+
+    game.addExplodifier(Paddle())
     Blah.explodifiers = game.getExplodifiers()
     game.setRunning(True)
     game.run()

@@ -1,0 +1,17 @@
+A promise returns 1 of 3 states
+
+* fulfilled
+* failed
+* pending
+
+Lambdas and Arrow functions
+
+* for unnamed functions that only need to be run once
+
+
+How do you consume promises?
+
+.then
+
+Presumably fetch is going to end up with a result. Now looking at the result, what type of data should it be (random dog api) => json
+
