@@ -14,11 +14,16 @@ class Explodifier(pg.sprite.Sprite):
 
 class Blah(pg.sprite.Sprite):
     explodifiers = None
-    def __init__(self):
+    def __init__(self, xcoord, ycoord):
         super().__init__()
         r = random.randint
-        self.image = pg.Surface((r(0,64),r(0,64)))
+        
+
+        self.image = pg.Surface((xcoord(0,64),ycoord(0,64)))
+        
+        #gives each brick a random color
         self.image.fill( (r(0,255), r(0,101), r(0,164)) )
+
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0,800)
         self.rect.y = random.randint(0,600)
@@ -27,6 +32,14 @@ class Blah(pg.sprite.Sprite):
 #        self.boom = pg.mixer.Sound("./boom.mp3")
 
     def update(self):
+
+        
+        keys = pg.key.get_pressed()
+
+        self.rect.x += (keys[pg.K_RIGHT] - keys[pg.K_LEFT]) * 5
+        self.rect.centerx = self.rect.centerx % 800
+        self.rect.centery = self.rect.centery % 600
+
         self.rect.x += self.velocity[0]
         self.rect.y += self.velocity[1]
         if self.rect.x < 0:
@@ -90,8 +103,9 @@ class Game:
 def main():
     game = Game()
     
-    for _ in range(0,100):
-        game.addBlah( Blah() )
+    for x in range(0, 9):
+        for y in range (0, 4):
+            game.addBlah( Blah(x, y) )
 
     game.addExplodifier(Explodifier())
     Blah.explodifiers = game.getExplodifiers()

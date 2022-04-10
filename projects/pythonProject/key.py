@@ -26,7 +26,11 @@ is restricted within the screen.
 class Paddle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.rect = pygame.Rect(150, 580, 250, 20)
+        self.image = pygame.Surface( (250, 20) )
+        self.rect = self.image.get_rect()
+        pygame.draw.circle(self.image, (0, 101, 164), (32, 32), 32)
+        self.rect.x = 150
+        self.rect.y = 150
 
     def move(self):
         run = True
