@@ -12,13 +12,13 @@ A constructor that creates a brick
 
 """
 class Brick(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, xcoord, ycoord):
         super().__init__()
-        self.image = pg.Surface((64, 64))
+        self.image = pg.Surface((100, 100))
         self.rect = self.image.get_rect()
-       # pg.draw.circle(self.image, (0, 101, 164), (32, 32), 32)
-        self.rect.x = 400
-        self.rect.y = 300
+        #pg.draw.circle(self.image, (0, 101, 164), (32, 32), 32)
+        self.rect.x = xcoord
+        self.rect.y = ycoord
 
 """
 A constructor that creates a ball
@@ -37,34 +37,25 @@ class Paddle(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        # set window size to get screen dimensions
-        window = pg.display.set_mode((800, 800))
-        width, height = window.get_size()
-
         # create paddle
-        self.image = pg.Surface((300, 25))
+        self.image = pg.Surface((300, 100))
         self.rect = self.image.get_rect()
-
+        
 
         # position paddle
-        self.rect.x = 400
-        self.rect.y = 600
+        self.rect.x = 200
+        self.rect.y = 500
 
 
     def move(self):
+        #found this code on stack overflow
         keys = pg.key.get_pressed()
 
-        # use key binding to move the paddle
-        if pg.key.get_pressed()[K_LEFT]:
-            print("a was pressed")
-            # reset x-coordinate by -100 (left)
-            
-            self.rect.x += self.velocity[0]
-            self.velocity(5, 10)
-        
-        if keys[K_RIGHT]:
-            # reset x-coordinate by 100 (right)
-            self.rect.x += 100
+        self.rect.x += (keys[pygame.K_RIGHT] - keys[pg.K_LEFT]) * 5
+        self.rect.y += (keys[pygame.K_LEFT] - keys[pg.K_RIGHT]) * 5
+
+       # self.rect.centerx = self.rect.centerx % window.get_width()
+       # self.rect.centery = rect.centery % window.get_height()
 
 class Blah(pg.sprite.Sprite):
     explodifiers = None
@@ -157,8 +148,9 @@ class Game:
 def main():
     game = Game()
 
-    for _ in range(0,50):
-        game.addBrick(Blah())
+    for x in range(0, 7):
+        for y in range(0, 4):
+            game.addExplodifier(Brick(x, y))
         #game.addBlah( Blah() )
 
     game.addExplodifier(Paddle())
