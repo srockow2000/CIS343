@@ -46,13 +46,12 @@ class Brick(pg.sprite.Sprite):
         ballCollision = pg.sprite.spritecollide(self, Game.balls, False)
 
         if ballCollision:
-            self.__health -= 25
-            self.image.fill( (self.__red, self.__blue, self.__green) )
+            self.__health -= 250
 
         if self.__health <= 0:
             # this will move the bricks off screen
-            self.rect.x = -100
-            self.rect.y = -100
+            self.rect.x -= self.rect.x
+            self.rect.y -= self.rect.y
             
     
     """
@@ -75,7 +74,6 @@ class Ball(pg.sprite.Sprite):
         super().__init__()
         
         self.__lives = 5
-        self.__points = 0
 
          # a random variable for direction
         r = random.randint
@@ -113,8 +111,7 @@ class Ball(pg.sprite.Sprite):
 
         if brickCollision:
             self.velocity[1] = -self.velocity[1]
-            Ball.getPoints(self)
-            Ball.setPoints(self, 25)
+
     
         # check for paddle collision
         paddleCollision = pg.sprite.spritecollide(self, Game.paddles, False)
@@ -135,17 +132,6 @@ class Ball(pg.sprite.Sprite):
     def setLives(self, value):
         self.__lives = value
 
-    """ 
-    a method to return the number of total points
-    """
-    def getPoints(self):
-        return self.__points
-
-    """
-    a method to set/update the number of points
-    """
-    def setPoints(self, value):
-        self.__points += value
 
 """
 The paddle class
@@ -180,13 +166,11 @@ class Paddle(pg.sprite.Sprite):
 """
 This class updates the score and lives
 """
-class Overlay(pg.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        print(Ball().getPoints())
-
-    def update(self):
-        print(Ball().getPoints())
+class Overlay:
+    #Brick().getHealth()
+    Ball().getLives()
+    # need ball getter
+    #return score
 
 class Game:
     def __init__(self):
@@ -221,10 +205,6 @@ class Game:
         # Player's paddle
         self.__paddle = Paddle()
 
-        # initialize the overlay
-        self.overlay = pg.sprite.Group()
-        self.overlay.add( Overlay() )
-
     def run(self):
         while self.__running:
             events = pg.event.get()
@@ -245,15 +225,12 @@ class Game:
             self.balls.update()
             self.paddles.update()
             self.brick.update()
-            self.overlay.update()
-
             # Redraw
             self.screen.fill( (255, 255, 255) ) 
             self.balls.draw(self.screen)
             self.brick.draw(self.screen)
             self.paddles.draw(self.screen)
-#            self.overlay.draw(self.screen)
-
+          
             pg.display.flip()
             self.clock.tick(60)
 
