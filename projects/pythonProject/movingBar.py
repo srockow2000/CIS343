@@ -177,7 +177,13 @@ class Game:
 
         # initialize the number of bricks
         self.brick = pg.sprite.Group()
-     
+    
+        for x in range (0, 8):
+            for y in range (0, 5):
+                self.brick.add(Brick(x, y))
+                #self.brick.draw(self.screen)
+                self.brick.update()
+        
         # initialize the paddle
         self.paddles = pg.sprite.Group()
         self.paddles.add(Paddle())

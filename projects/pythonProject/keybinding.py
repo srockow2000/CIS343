@@ -12,12 +12,11 @@ class Item(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pg.Surface((64, 64))
-        
+
 
 
 """
 A constructor that creates the paddle
-
 Function: move - allows the paddle to move
 from left to right using keybindings. Movement
 is restricted within the screen.
@@ -26,11 +25,7 @@ is restricted within the screen.
 class Paddle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface( (250, 20) )
-        self.rect = self.image.get_rect()
-        #pygame.draw.circle(self.image, (0, 101, 164), (32, 32), 32)
-        self.rect.x = 150
-        self.rect.y = 150
+        self.rect = pygame.Rect(150, 580, 250, 20)
 
     def move(self):
         run = True
@@ -84,6 +79,6 @@ def main():
     game.setRunning(True)
     game.running()
 
-    
+
 if __name__ == '__main__':
     main()
