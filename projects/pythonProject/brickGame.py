@@ -107,14 +107,19 @@ class Ball(pg.sprite.Sprite):
         # check if ball hits the ground and take away a life
         if self.rect.y == 0:
             self.__lives -= 1
-    
+
+        # remove ball if lives are gone
+        if self.__lives == 0:
+            self.rect.x = -100
+            self.rect.y = -100
+            self.velocity = [0, 0]
         # check for brick collision
         brickCollision = pg.sprite.spritecollide(self, Game.bricks, False)
 
         if brickCollision:
             self.velocity[1] = -self.velocity[1]
             Ball.getPoints(self)
-            Ball.setPoints(self, 25)
+            Ball.setPoints(self, 250)
     
         # check for paddle collision
         paddleCollision = pg.sprite.spritecollide(self, Game.paddles, False)
@@ -185,9 +190,6 @@ class Overlay(pg.sprite.Sprite):
         super().__init__()
         print(Ball().getPoints())
 
-    def update(self):
-        print(Ball().getPoints())
-
 class Game:
     def __init__(self):
         pg.init()
@@ -236,8 +238,12 @@ class Game:
 
                 if event.type == pg.KEYDOWN:
                     if event.type == pg.K_DOWN:
-                        #self.balls.add(Ball () )
+                        self.balls.add(Ball () )
                         print("added ball")
+
+                # adds a new ball when the down arrow is pressed; no limit
+                if pg.key.get_pressed()[pg.K_DOWN]:
+                    self.balls.add( Ball() )
 
          # Take events
 
