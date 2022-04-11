@@ -41,26 +41,19 @@ class Brick(pg.sprite.Sprite):
     a method to update brick health when hit
     Each brick will have a health score of 30
     and can take 3 hits before being destroyed
-    """
+    
     def update(self):
-        
+        self.__health -= 10
         if self.__health <= 0:
             # this will move the bricks off screen
             self.rect.x -= self.rect.x
             self.rect.y -= self.rect.y
-            
-    
+    """
     """
     a method to return brick health
     """
     def getHealth(self):
         return self.__health
-
-    """
-    a method to set brick health
-    """
-    def setHealth(self, value):
-        self.__health -= value
 
 """
 A constructor that creates a ball
@@ -105,17 +98,9 @@ class Ball(pg.sprite.Sprite):
         brickCollision = pg.sprite.spritecollide(self, Game.bricks, False)
 
         if brickCollision:
-            self.velocity[1] = -self.velocity[1]
-
-            Brick(self.rect.x, self.rect.y).setHealth(766)
-    
-        # check for paddle collision
-        paddleCollision = pg.sprite.spritecollide(self, Game.paddles, False)
-
-        if paddleCollision:
             self.velocity[0] = -self.velocity[0]
             self.velocity[1] = -self.velocity[1]
-
+    
     """
     a method to return the number of lives
     """
@@ -176,7 +161,6 @@ class Game:
         self.clock = pg.time.Clock()
         
         brick = None
-        paddles = None
         # initialize the number of balls
         self.balls = pg.sprite.Group()
         self.balls.add(Ball()) 
@@ -255,7 +239,6 @@ class Game:
 def main():
     game = Game()
     Game.bricks = game.getBricks()
-    Game.paddles = game.getPaddle()
     game.setRunning(True)
     game.run()
 
