@@ -12,7 +12,7 @@ health levels.
 
 Notes:
 
-    The overlay is currently not working -> this will be fixed soon
+    The overlay and sound are not working.
 
     Hidden keystrokes:
         f - speeds up the ball(s)
@@ -199,6 +199,12 @@ class Paddle(pg.sprite.Sprite):
 
         # set initial velocity
         self.velocity = 15
+        
+        """
+        mixer.init()
+        mixer.music.load('big-impact-7054.mp3')
+        #self.boom = mixer.music.play()
+        """
 
     def update(self):
         keys = pg.key.get_pressed()
@@ -206,11 +212,15 @@ class Paddle(pg.sprite.Sprite):
         # move the paddle based on key binding
         self.rect.x += (keys[pg.K_RIGHT] - keys[pg.K_LEFT]) * 15
         
-        # limits the paddle's movement
+        # limits the paddle's movement; plays music if boundaries are hit
         if self.rect.x > 500:
             self.rect.x = 500
+        #    self.boom.play()
+
         if self.rect.x < 0:
             self.rect.x = 0
+        #   self.boom.play()
+        
 
 
 """
